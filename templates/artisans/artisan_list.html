@@ -1,0 +1,14 @@
+<h1>Artisan List</h1>
+<ul>
+    {% for artisan in artisans %}
+        <li>
+            <img src="{{ artisan.profile_picture.url }}" alt="Profile Picture" style="width: 100px; height: 100px;">
+            <strong>{{ artisan.name }}</strong><br>
+            Category: {{ artisan.category }}<br>
+            Location: {{ artisan.location }}<br>
+            Phone: {{ artisan.phone_number }}<br>
+            Email: {{ artisan.email }}<br>
+            <a href="{% url 'artisan_detail' artisan.id %}">View Profile</a>
+        </li>
+    {% endfor %}
+</ul>
