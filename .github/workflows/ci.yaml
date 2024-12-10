@@ -10,7 +10,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOs-latest]
 
     steps:
     - name: Checkout repository
@@ -43,3 +46,4 @@ jobs:
     #   run: |
     #     # Add deployment commands here (e.g., to your server or cloud service)
     #     echo "Deploying application..."
+ 
