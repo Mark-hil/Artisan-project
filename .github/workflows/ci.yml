@@ -1,0 +1,45 @@
+name: Django CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Change this if your default branch is different (e.g., 'master')
+  pull_request:
+    branches:
+      - main  # Trigger CI on pull requests targeting main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'  # Replace with the version you're using
+
+    - name: Install dependencies
+      run: |
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        source .venv/bin/activate
+        coverage run manage.py test
+        coverage report
+
+    # - name: Upload test coverage to Codecov (optional)
+    #   uses: codecov/codecov-action@v3
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}  # If you're using Codecov for test coverage
+
+    - name: Deploy to production (optional)
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        # Add deployment commands here (e.g., to your server or cloud service)
+        echo "Deploying application..."
