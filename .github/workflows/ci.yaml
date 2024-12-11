@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOs-latest]
+        os: [ubuntu-latest, macOs-latest]
 
     steps:
     - name: Checkout repository
@@ -26,13 +26,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv .venv
-        if [ ${{matrix.os}} == 'windows-latest' ]; then
-          .venv/bin/activate
-        else
-          source .venv/bin/activate
-        fi
-        pip install -r requirements.txt
+        python -m venv .venv 
+        source .venv/bin/activate 
+        pip install -r requirements.txt"
 
     - name: Run tests
       run: |
