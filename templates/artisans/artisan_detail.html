@@ -1,7 +1,31 @@
-<h1>{{ artisan.name }}</h1>
-<img src="{{ artisan.profile_picture.url }}" alt="Profile Picture" style="width: 200px; height: 200px;">
-<p><strong>Category:</strong> {{ artisan.category }}</p>
-<p><strong>Location:</strong> {{ artisan.location }}</p>
-<p><strong>Phone:</strong> {{ artisan.phone_number }}</p>
-<p><strong>Email:</strong> {{ artisan.email }}</p>
-<p><strong>Description:</strong> {{ artisan.description }}</p>
+{% extends 'base.html' %}
+
+{% block title %}Artisan Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ artisan.profile_picture.url }}" class="img-fluid rounded-start" alt="{{ artisan.name }}" style="height: 100%; object-fit: cover;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">{{ artisan.name }}</h3>
+                    <p class="card-text">
+                        <strong>Category:</strong> {{ artisan.category }}<br>
+                        <strong>Location:</strong> {{ artisan.location }}<br>
+                        <strong>Phone:</strong> <a href="tel:{{ artisan.phone_number }}">{{ artisan.phone_number }}</a><br>
+                        <strong>Email:</strong> <a href="mailto:{{ artisan.email }}">{{ artisan.email }}</a><br>
+                    </p>
+                    <p class="card-text">
+                        <strong>Description:</strong><br>
+                        {{ artisan.description }}
+                    </p>
+                    <a href="{% url 'artisan_list' %}" class="btn btn-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,10 +2,22 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ArtisanForm
 from .models import Artisan
 
+
+def home(request):
+    return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def services(request):
+    return render(request, 'services.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
 def artisan_list(request):
     artisans = Artisan.objects.all()
     return render(request, 'artisans/artisan_list.html', {'artisans': artisans})
-
 
 
 def register_artisan(request):

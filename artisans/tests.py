@@ -27,40 +27,52 @@ class ArtisanModelTest(TestCase):
         pass  # Add this if your model has default fields
 
 
-class ArtisanListViewTest(TestCase):
+class ArtisanViewTests(TestCase):
+
     def setUp(self):
-        self.artisan = Artisan.objects.create(
-            name="Jane Smith",
-            phone_number="9876543210",
-            profile_picture=SimpleUploadedFile(
-                name='test_image.jpg',
-                content=b'',
-                content_type='image/jpeg'
-            )
+        # Create sample artisans
+        self.artisan1 = Artisan.objects.create(
+            name="John Doe",
+            category="Plumber",
+            location="Kumasi",
+            phone_number="1234567890",
+            email="johndoe@example.com",
+            description="Experienced plumber with 5+ years of work experience.",
         )
-    # def setUp(self):
-    #     # Create sample artisans
-    #     Artisan.objects.create(name="John Doe", category="Electrician", location="Kumasi")
-    #     Artisan.objects.create(name="Jane Smith", category="Plumber", location="Accra")
+        self.artisan2 = Artisan.objects.create(
+            name="Jane Smith",
+            category="Electrician",
+            location="Accra",
+            phone_number="0987654321",
+            email="janesmith@example.com",
+            description="Certified electrician specializing in home wiring.",
+        )
 
-    def test_artisan_list_view_status_code(self):
-        # Check if the view returns a 200 status code
-        response = self.client.get(reverse('artisan_list'))
-        self.assertEqual(response.status_code, 200)
+    def test_artisan_list_view(self):
+        # Test the artisan list page
+        url = reverse('artisan_list')  # Replace 'artisan_list' with your URL name
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)  # Ensure the page loads
+        self.assertContains(response, self.artisan1.name)  # Check if artisan1 is listed
+        self.assertContains(response, self.artisan2.name)  # Check if artisan2 is listed
+        self.assertTemplateUsed(response, 'artisans/artisan_list.html')  # Ensure correct template is used
 
-    def test_artisan_list_view_template(self):
-        # Check if the correct template is used
-        response = self.client.get(reverse('artisan_list'))
-        self.assertTemplateUsed(response, 'artisans/artisan_list.html')
+    def test_artisan_detail_view(self):
+        # Test the artisan detail page
+        url = reverse('artisan_detail', args=[self.artisan1.id])  # Replace 'artisan_detail' with your URL name
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)  # Ensure the page loads
+        self.assertContains(response, self.artisan1.name)  # Check if the artisan's name is displayed
+        self.assertContains(response, self.artisan1.category)  # Check if the category is displayed
+        self.assertContains(response, self.artisan1.description)  # Check if the description is displayed
+        self.assertTemplateUsed(response, 'artisans/artisan_detail.html')  # Ensure correct template is used
 
-    def test_artisan_list_view_content(self):
-        # Check if the content includes the names of the artisans
-        response = self.client.get(reverse('artisan_list'))
-        # self.assertContains(response, "John Doe")
-        self.assertContains(response, "Jane Smith")
-    
-    
-        
+    def test_view_profile_link(self):
+        # Test if "View Profile" link works
+        list_url = reverse('artisan_list')
+        response = self.client.get(list_url)
+        detail_url = reverse('artisan_detail', args=[self.artisan1.id])
+        self.assertContains(response, f'href="{detail_url}"')  # Check if the detail link exists
 
 
 
