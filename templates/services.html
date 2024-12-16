@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Services{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Title -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">Our Services</h1>
+        <p class="text-muted">Explore the range of services our skilled artisans offer to meet your needs.</p>
+    </div>
+
+    <!-- Services Cards -->
+    <div class="row g-4">
+        <!-- Example Service: Plumbing -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <img src="{% static 'images/plumbing.jpg' %}" class="card-img-top" alt="Plumbing Service"
+                     style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Plumbing</h5>
+                    <p class="card-text text-muted">
+                        Our skilled plumbers are ready to fix leaks, install pipes, and ensure your plumbing runs smoothly.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Service: Carpentry -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <img src="{% static 'images/carpentry.jpg' %}" class="card-img-top" alt="Carpentry Service"
+                     style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Carpentry</h5>
+                    <p class="card-text text-muted">
+                        From furniture repairs to custom woodwork, our expert carpenters deliver quality craftsmanship.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Service: Electrical -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <img src="{% static 'images/electrical.jpg' %}" class="card-img-top" alt="Electrical Service"
+                     style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Electrical</h5>
+                    <p class="card-text text-muted">
+                        Hire our electricians for installations, repairs, and all your electrical needs, done safely and efficiently.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Service: Painting -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <img src="{% static 'images/painting.jpg' %}" class="card-img-top" alt="Painting Service"
+                     style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Painting</h5>
+                    <p class="card-text text-muted">
+                        Brighten up your home or office with professional painting services tailored to your preferences.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Service: Cleaning -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <img src="{% static 'images/cleaning.jpg' %}" class="card-img-top" alt="Cleaning Service"
+                     style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Cleaning</h5>
+                    <p class="card-text text-muted">
+                        Professional cleaning services for homes, offices, and more to keep your spaces spotless.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Service: Repairs -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <img src="{% static 'images/repairs.jpg' %}" class="card-img-top" alt="Repairs Service"
+                     style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Repairs</h5>
+                    <p class="card-text text-muted">
+                        From appliances to furniture, our artisans offer expert repair services to restore functionality.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,88 @@
-<h1>Register as an Artisan</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+{% extends 'base.html' %}
+
+{% block title %}Register as an Artisan{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center bg-primary text-white py-2 rounded">Register as an Artisan</h3>
+            <form method="post" enctype="multipart/form-data" class="p-4 bg-white rounded shadow-sm">
+                {% csrf_token %}
+                
+                <!-- Name Field -->
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-bold">Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-person"></i>
+                        </span>
+                        <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-envelope"></i>
+                        </span>
+                        <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <!-- Phone Number Field -->
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label fw-bold">Phone Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-telephone"></i>
+                        </span>
+                        <input type="tel" name="phone_number" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                </div>
+
+                <!-- Location Field -->
+                <div class="mb-3">
+                    <label for="location" class="form-label fw-bold">Location</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-geo-alt"></i>
+                        </span>
+                        <input type="text" name="location" class="form-control" placeholder="Enter your location" required>
+                    </div>
+                </div>
+
+                <!-- Service Category Field -->
+                <div class="mb-3">
+                    <label for="category" class="form-label fw-bold">Service Category</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-card-list"></i>
+                        </span>
+                        <input type="text" name="category" class="form-control" placeholder="Enter your service category" required>
+                    </div>
+                </div>
+
+                <!-- Description Field -->
+                <div class="mb-3 ">
+                    <label for="description" class="form-label bi bi-pencil fw-bold">Description</label>
+                    <textarea name="description" class="form-control" rows="4" placeholder="Describe your skills or services" required></textarea>
+                </div>
+
+                <!-- Profile Picture Field -->
+                <div class="mb-3">
+                    <label for="profile_picture" class="form-label fw-bold">Upload Profile Picture</label>
+                    <input type="file" name="profile_picture" class="form-control">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

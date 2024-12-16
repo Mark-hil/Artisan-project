@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Title -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">About Us</h1>
+        <p class="text-muted">Learn more about our mission, vision, and what we do.</p>
+    </div>
+
+    <!-- About Content -->
+    <div class="row align-items-center">
+        <!-- About Text -->
+        <div class="col-md-6">
+            <h2 class="fw-bold">Who We Are</h2>
+            <p class="text-muted">
+                At <strong>Connect To Artisan</strong>, we aim to bridge the gap between skilled artisans 
+                and customers in need of reliable services. We believe in empowering local talent and 
+                simplifying service connections to help people find trustworthy artisans in their area.
+            </p>
+            <p class="text-muted">
+                Our platform provides a seamless way for artisans to showcase their skills and for 
+                customers to request services effortlessly. Whether you need a plumber, carpenter, 
+                or electrician, we have you covered.
+            </p>
+        </div>
+
+        <!-- About Image -->
+        <div class="col-md-6 text-center">
+            <img src="{% static 'images/about_image.jpg' %}" 
+                 alt="About Us" class="img-fluid rounded shadow" 
+                 style="width: 500px; height: 350px; object-fit: cover;">
+        </div>
+    </div>
+
+    <!-- Mission and Vision Section -->
+    <div class="row mt-5">
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="fw-bold text-primary">Our Mission</h3>
+                    <p class="text-muted">
+                        To connect skilled artisans with customers who value quality work, 
+                        while providing a platform for artisans to grow their businesses.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="fw-bold text-primary">Our Vision</h3>
+                    <p class="text-muted">
+                        To become the leading platform for artisans and service seekers, creating 
+                        a trusted network of professionals and satisfied customers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

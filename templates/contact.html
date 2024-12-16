@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">Contact Us</h1>
+        <p class="text-muted">We'd love to hear from you! Feel free to get in touch.</p>
+    </div>
+
+    <!-- Contact Details and Form -->
+    <div class="row g-4">
+        <!-- Contact Details -->
+        <div class="col-md-6">
+            <h4 class="fw-bold">Get in Touch</h4>
+            <p class="text-muted">Reach out to us through any of the following methods:</p>
+            <ul class="list-unstyled">
+                <li class="mb-3">
+                    <i class="bi bi-geo-alt text-primary"></i> 
+                    <strong>Address:</strong> 123 Artisan Street, Kumasi, Ghana
+                </li>
+                <li class="mb-3">
+                    <i class="bi bi-telephone text-primary"></i>
+                    <strong>Phone:</strong> +233 123 456 789
+                </li>
+                <li class="mb-3">
+                    <i class="bi bi-envelope text-primary"></i>
+                    <strong>Email:</strong> info@artisans.com
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Send us a Message</h4>
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Name Field -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-bold">Your Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bold">Your Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+
+                        <!-- Subject Field -->
+                        <div class="mb-3">
+                            <label for="subject" class="form-label fw-bold">Subject</label>
+                            <input type="text" name="subject" class="form-control" placeholder="Enter subject" required>
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="mb-3">
+                            <label for="message" class="form-label fw-bold">Message</label>
+                            <textarea name="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}
