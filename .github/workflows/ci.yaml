@@ -3,17 +3,17 @@ name: Django CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Change this if your default branch is different (e.g., 'master')
+      - main  # Runs CI/CD when changes are pushed to the main branch
   pull_request:
     branches:
-      - main  # Trigger CI on pull requests targeting main branch
+      - main  # Runs CI/CD for pull requests targeting main
 
 jobs:
   build:
-    runs-on: ${{matrix.os}}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macOs-latest]
+        os: [ubuntu-latest, macos-latest]  # Runs on multiple OS for compatibility testing
 
     steps:
     - name: Checkout repository
@@ -22,28 +22,53 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'  # Replace with the version you're using
+        python-version: '3.10'  # Update if using a different version
 
     - name: Install dependencies
       run: |
-        python -m venv .venv 
-        source .venv/bin/activate 
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run tests
+    - name: Run migrations
+      run: |
+        source .venv/bin/activate
+        python manage.py migrate
+
+    - name: Run tests and generate coverage report
       run: |
         source .venv/bin/activate
         coverage run manage.py test
-        coverage report
+        coverage report -m
 
-    # - name: Upload test coverage to Codecov (optional)
+    # Optional: Upload test coverage to Codecov
+    # - name: Upload test coverage to Codecov
     #   uses: codecov/codecov-action@v3
     #   with:
-    #     token: ${{ secrets.CODECOV_TOKEN }}  # If you're using Codecov for test coverage
+    #     token: ${{ secrets.CODECOV_TOKEN }}  # Requires adding a Codecov token as a secret
 
-    # - name: Deploy to production (optional)
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: |
-    #     # Add deployment commands here (e.g., to your server or cloud service)
-    #     echo "Deploying application..."
- 
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    needs: build  # Deploy only if the build stage succeeds
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Deploy to production
+      run: |
+        # Add your deployment commands here (e.g., SSH into a server, push to Heroku, AWS, or DigitalOcean)
+        echo "Deploying application..."
