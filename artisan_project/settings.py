@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,13 +77,47 @@ WSGI_APPLICATION = 'artisan_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# Read the values from the environment
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
-
+# Determine which database to use (local PostgreSQL or RDS MySQL)
+# if os.getenv('USE_POSTGRES') == 'True':  # You can control this from an environment variable
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.getenv('DB_ENGINE_POSTGRES'),
+#             'NAME': os.getenv('DB_NAME_POSTGRES'),
+#             'USER': os.getenv('DB_USER_POSTGRES'),
+#             'PASSWORD': os.getenv('DB_PASSWORD_POSTGRES'),
+#             'HOST': os.getenv('DB_HOST_POSTGRES'),
+#             'PORT': os.getenv('DB_PORT_POSTGRES'),
+#         }
+#     }
+# else:  # Switch to MySQL on AWS RDS
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': os.getenv('DB_ENGINE_MYSQL'),
+#             'NAME': os.getenv('DB_NAME_MYSQL'),
+#             'USER': os.getenv('DB_USER_MYSQL'),
+#             'PASSWORD': os.getenv('DB_PASSWORD_MYSQL'),
+#             'HOST': os.getenv('DB_HOST_MYSQL'),
+#             'PORT': os.getenv('DB_PORT_MYSQL'),
+#         }
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
